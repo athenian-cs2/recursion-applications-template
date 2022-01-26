@@ -7,107 +7,59 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MyTests {
     @Test
-    public void testSum() {
-        // sum([1, 2, 3, 4]) => 10
-        // sum([4, 3, 2, 1]) => 10
-        // sum([7, 3, 2, 8, 2, 3, 4]) => 29
-        assertEquals(10, MyMain.sum(new int[] {1, 2, 3, 4}), "The sum of [1, 2, 3, 4] should be: 10");
-        assertEquals(10, MyMain.sum(new int[] {4, 3, 2, 1}), "The sum of [4, 3, 2, 1] should be: 10");
-        assertEquals(29, MyMain.sum(new int[] {7, 3, 2, 8, 2, 3, 4}), "The sum of [7, 3, 2, 8, 2, 3, 4] should be: 10");
+    public void testBinarySearch() {
+        assertEquals(true, MyMain.binarySearch(new int[] {1, 2, 4, 5, 7, 8, 10}, 2), "Whether or not the array [1, 2, 4, 5, 7, 8, 10] contains 2 should be: true");
+        assertEquals(true, MyMain.binarySearch(new int[] {-5, 2, 7, 13, 25, 38, 42, 58, 70, 72, 100, 104, 128}, 104), "Whether or not the array [-5, 2, 7, 13, 25, 38, 42, 58, 70, 72, 100, 104, 128] contains 104 should be: true");
+        assertEquals(false, MyMain.binarySearch(new int[] {-5, 2, 7, 13, 25, 38, 42, 58, 70, 72, 100, 104, 128}, 99), "Whether or not the array [-5, 2, 7, 13, 25, 38, 42, 58, 70, 72, 100, 104, 128] contains 99 should be: false");
     }
 
     @Test
-    public void testSearch() {
-        // search([1, 2, 3, 4], 1) => true
-        // search([1, 2, 3, 4], 7) => false
-        // search([7, 3, 2, 8, 2, 3, 4], 3) => true
-        assertEquals(true, MyMain.search(new ArrayList<Integer> (Arrays.asList(1, 2, 3, 4)), 1), "Searching [1, 2, 3, 4] for 1 should be: true");
-        assertEquals(false, MyMain.search(new ArrayList<Integer> (Arrays.asList(1, 2, 3, 4)), 7), "Searching [1, 2, 3, 4] for 7 should be: false");
-        assertEquals(true, MyMain.search(new ArrayList<Integer> (Arrays.asList(7, 3, 2, 8, 2, 3, 4)), 3), "Searching [7, 3, 2, 8, 2, 3, 4] for 3 should be: true");
+    public void testCalculateSize() {
+        // folder1 contains 3 files
+        Folder folder1 = new Folder("folder1");
+        folder1.addToFolder(new File("file1", 200));
+        folder1.addToFolder(new File("file2", 300));
+        folder1.addToFolder(new File("file3", 150));
+
+        // folder2 contains a file and folder1
+        Folder folder2 = new Folder("folder2");
+        folder2.addToFolder(new File("file4", 200));
+        folder2.addToFolder(folder1);
+
+        assertEquals(1546, folder1.calculateSize(), "The size of folder1 should be: 1546");
+        assertEquals(2514, folder2.calculateSize(), "The size of folder2 should be: 2514");
     }
 
     @Test
-    public void testAllEven() {
-        // allEven([1, 2, 3, 4]) => false
-        // allEven([0, 2, 6, 4]) => true
-        // allEven([7, 3, 2, 8, 2, 3, 4]) => false
-        assertEquals(false, MyMain.allEven(new int[] {1, 2, 3, 4}), "Checking if [1, 2, 3, 4] are all even should be: false");
-        assertEquals(true, MyMain.allEven(new int[] {0, 2, 6, 4}), "Checking if [0, 2, 6, 4] are all even should be: true");
-        assertEquals(false, MyMain.allEven(new int[] {7, 3, 2, 8, 2, 3, 4}), "Checking if [7, 3, 2, 8, 2, 3, 4] are all even should be: false");
+    public void testCopy() {
+        // folder1 contains 3 files
+        Folder folder1 = new Folder("folder1");
+        folder1.addToFolder(new File("file1", 200));
+        folder1.addToFolder(new File("file2", 300));
+        folder1.addToFolder(new File("file3", 150));
+
+        // folder2 contains a file and folder1
+        Folder folder2 = new Folder("folder2");
+        folder2.addToFolder(new File("file4", 200));
+        folder2.addToFolder(folder1);
+
+        assertEquals("folder1_copy: [file1_copy: 200, file2_copy: 300, file3_copy: 150]", ""+folder1.copy(), "The copy of folder1 should be: folder1_copy: [file1_copy: 200, file2_copy: 300, file3_copy: 150]");
+        assertEquals("folder2_copy: [file4_copy: 200, folder1_copy: [file1_copy: 200, file2_copy: 300, file3_copy: 150]]", ""+folder2.copy(), "The copy of folder2 should be: folder2_copy: [file4_copy: 200, folder1_copy: [file1_copy: 200, file2_copy: 300, file3_copy: 150]]");
     }
 
     @Test
-    public void testHasCountCopies() {
-        assertEquals(false, MyMain.hasCountCopies(new int[] {1, 2, 5, 2, 1, 3, 2}, 2, 1), "Whether or not the array [1, 2, 5, 2, 1, 3, 2] contains exactly 1 copy of 2 should be: false");
-        assertEquals(true, MyMain.hasCountCopies(new int[] {1, 2, 5, 2, 1, 3, 2}, 2, 3), "Whether or not the array [1, 2, 5, 2, 1, 3, 2] contains exactly 3 copies of 2 should be: true");
-        assertEquals(false, MyMain.hasCountCopies(new int[] {1, 2, 5, 2, 1, 3, 2}, 2, 4), "Whether or not the array [1, 2, 5, 2, 1, 4, 2] contains exactly 4 copies of 2 should be: false");
-        assertEquals(false, MyMain.hasCountCopies(new int[] {1, 2, 5, 2, 1, 3, 2}, 1, 1), "Whether or not the array [1, 2, 5, 2, 1, 3, 2] contains exactly 1 copy of 1 should be: false");
-        assertEquals(true, MyMain.hasCountCopies(new int[] {1, 2, 5, 2, 1, 3, 2}, 1, 2), "Whether or not the array [1, 2, 5, 2, 1, 3, 2] contains exactly 2 copies of 1 should be: true");
-        assertEquals(false, MyMain.hasCountCopies(new int[] {1, 2, 5, 2, 1, 3, 2}, 1, 4), "Whether or not the array [1, 2, 5, 2, 1, 4, 2] contains exactly 4 copies of 1 should be: false");
-    }
+    public void testMerge() {
+        int[] arr1 = {1, 3, 4, 6};
+        int[] arr2 = {2, 5, 7, 8};
 
-    @Test
-    public void testIsSorted() {
-        ArrayList<Integer> list1 = new ArrayList<Integer>(Arrays.asList(new Integer[] {1, 2, 3, 4}));
-        ArrayList<Integer> list2 = new ArrayList<Integer>(Arrays.asList(new Integer[] {1, 1, 2, 2}));
-        ArrayList<Integer> list3 = new ArrayList<Integer>(Arrays.asList(new Integer[] {-5, -3, -1, 2}));
-        ArrayList<Integer> list4 = new ArrayList<Integer>(Arrays.asList(new Integer[] {1, 2, 1, 4}));
-        ArrayList<Integer> list5 = new ArrayList<Integer>(Arrays.asList(new Integer[] {1, 2, 3, 2}));
-        assertEquals(true, MyMain.isSorted(list1), "Whether or not the ArrayList [1, 2, 3, 4] is sorted should be: true");
-        assertEquals(true, MyMain.isSorted(list2), "Whether or not the ArrayList [1, 1, 2, 2] is sorted should be: true");
-        assertEquals(true, MyMain.isSorted(list3), "Whether or not the ArrayList [-5, -3, -1, 2] is sorted should be: true");
-        assertEquals(false, MyMain.isSorted(list4), "Whether or not the ArrayList [1, 2, 1, 4] is sorted should be: false");
-        assertEquals(false, MyMain.isSorted(list5), "Whether or not the ArrayList [1, 2, 3, 2] is sorted should be: false");
-    }
+        int[] arr3 = {-4, 5, 7, 8};
+        int[] arr4 = {-5, -1, 2, 3};
 
-    @Test
-    public void testEscape() {
-                                                                // row coordinates:
-          char[][] mat = { {'w', 'w', ' ', 'w', 'w', 'w'},      // 0
-                           {'w', ' ', ' ', 'w', 'f', 'w'},      // 1
-                           {'w', ' ', 'w', 'w', ' ', 'w'},      // 2
-                           {'w', ' ', ' ', ' ', ' ', 'w'},      // 3
-                           {'w', 'w', 'w', ' ', 'w', 'w'},      // 4
-                           {'w', ' ', ' ', ' ', 'w', ' '},      // 5
-                           {'w', 'w', 'w', 'w', 'w', ' '} };    // 6
-        // col coordinates:  0    1    2    3    4    5
+        int[] arr5 = {1, 3, 4, 6, 10, 11, 15, 16};
+        int[] arr6 = {2, 5, 7, 8, 9, 13, 20, 21};
 
-        // escape(mat, 0, 0) => false because (0, 0) is a wall
-        // escape(mat, 0, 2) => true because we should be able to make it to f at (1, 4)
-        // escape(mat, 5, 1) => true because we should be able to make it to f at (1, 4)
-        // escape(mat, 6, 5) => false because we get stuck
-
-        assertEquals(false, MyMain.escape(mat, 0, 0), "Starting at (0, 0) should return false because (0, 0) is a wall");
-        // row coordinates:
-        mat = new char[][]{{'w', 'w', ' ', 'w', 'w', 'w'},      // 0
-                {'w', ' ', ' ', 'w', 'f', 'w'},      // 1
-                {'w', ' ', 'w', 'w', ' ', 'w'},      // 2
-                {'w', ' ', ' ', ' ', ' ', 'w'},      // 3
-                {'w', 'w', 'w', ' ', 'w', 'w'},      // 4
-                {'w', ' ', ' ', ' ', 'w', ' '},      // 5
-                {'w', 'w', 'w', 'w', 'w', ' '}};    // 6
-        // col coordinates:  0    1    2    3    4    5
-
-        assertEquals(true, MyMain.escape(mat, 0, 2), "Starting at (0, 2) should return true because we should be able to make it to f at (1, 4)");
-        mat = new char[][]{{'w', 'w', ' ', 'w', 'w', 'w'},      // 0
-                {'w', ' ', ' ', 'w', 'f', 'w'},      // 1
-                {'w', ' ', 'w', 'w', ' ', 'w'},      // 2
-                {'w', ' ', ' ', ' ', ' ', 'w'},      // 3
-                {'w', 'w', 'w', ' ', 'w', 'w'},      // 4
-                {'w', ' ', ' ', ' ', 'w', ' '},      // 5
-                {'w', 'w', 'w', 'w', 'w', ' '}};    // 6
-        // col coordinates:  0    1    2    3    4    5
-
-        assertEquals(true, MyMain.escape(mat, 5, 1), "Starting at (5, 1) should return true because we should be able to make it to f at (1, 4)");
-        mat = new char[][]{{'w', 'w', ' ', 'w', 'w', 'w'},      // 0
-                {'w', ' ', ' ', 'w', 'f', 'w'},      // 1
-                {'w', ' ', 'w', 'w', ' ', 'w'},      // 2
-                {'w', ' ', ' ', ' ', ' ', 'w'},      // 3
-                {'w', 'w', 'w', ' ', 'w', 'w'},      // 4
-                {'w', ' ', ' ', ' ', 'w', ' '},      // 5
-                {'w', 'w', 'w', 'w', 'w', ' '}};    // 6
-        // col coordinates:  0    1    2    3    4    5
-
-        assertEquals(false, MyMain.escape(mat, 6, 5), "Starting at (6, 5) should return false because we get stuck");
+        assertEquals("[1, 2, 3, 4, 5, 6, 7, 8]", Arrays.toString(MyMain.merge(arr1, arr2)), "The result of merging [1, 3, 4, 6] with [2, 5, 7, 8] should be: [1, 2, 3, 4, 5, 6, 7, 8]");
+        assertEquals("[-5, -4, -1, 2, 3, 5, 7, 8]", Arrays.toString(MyMain.merge(arr3, arr4)), "The result of merging [-4, 5, 7, 8] with [-5, -1, 2, 3] should be: [-5, -4, -1, 2, 3, 5, 7, 8]");
+        assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 20, 21]", Arrays.toString(MyMain.merge(arr5, arr6)), "The result of merging [1, 3, 4, 6, 10, 11, 15, 16] with [2, 5, 7, 8, 9, 13, 20, 21] should be: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 16, 20, 21]");
     }
 }

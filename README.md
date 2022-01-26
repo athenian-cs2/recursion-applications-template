@@ -1,6 +1,6 @@
-# Week 4 Day 1: Array and ArrayList Recursion
+# Week 4 Day 2: Recursion Applications
 
-In class today, you'll be writing some more code to practice recursion with arrays and ArrayLists
+In class today, we'll look at a couple applications of recursion!
 
 <br />
 

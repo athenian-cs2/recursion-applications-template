@@ -1,129 +1,29 @@
 import java.util.ArrayList;
 
 public class MyMain {
-    // ********************
-    // Examples From Class:
-    // ********************
-
-    // Use tail recursion to find the largest number in an array
-
-    // Wrapper Method:
-    public static int maxArray(int[] arr) {
-        // Call tail recursive method, with i starting at 0
-        return maxArrayTR(arr, 0, Integer.MIN_VALUE);
-    }
-
-    // Tail Recursive Method:
-    public static int maxArrayTR(int[] arr, int i, int max) {
-        // Base case
-        if (i == arr.length) {
-            return max;
-        }
-        // Recursive call
-        else if (arr[i] > max) {
-            return maxArrayTR(arr, i + 1, arr[i]);
-        }
-        else {
-            return maxArrayTR(arr, i + 1, max);
-        }
-    }
-
-
     // **************************
     // In-class Practice Problems
     // **************************
 
-    // Write a method that uses recursion to add up all the
-    // values in an array
-
-    // The tail recursive method is provided and wrapper method
-    // is already set up for this problem
+    // Write a method that uses recursion to search for a value in
+    // an array using binary search!
 
     // Examples:
-    // sum([1, 2, 3, 4]) => 10
-    // sum([4, 3, 2, 1]) => 10
-    // sum([7, 3, 2, 8, 2, 3, 4]) => 29
+    // binarySearch([5, 2, 4, 3], 4) => true
+    // binarySearch([6, 7, 1, 2, 8], 5) => false
 
-    // Wrapper Method (Provided for you):
-    public static int sum(int[] arr) {
-        return sumTR(arr,0, 0);
+    // Wrapper Method
+    public static boolean binarySearch(int[] arr, int num) {
+        return binarySearchTR(arr, num, 0, arr.length-1);
     }
 
-    // Tail Recursive Method:
-    public static int sumTR(int[] arr, int i, int sum) {
-        // YOUR CODE HERE
-        return -1;
-    }
-
-
-    // Write a method that uses recursion to search to see
-    // if an **ArrayList** contains a given value x
-
-    // The tail recursive method is provided and wrapper method
-    // is already set up for this problem
-
-    // Examples:
-    // search([1, 2, 3, 4], 1) => true
-    // search([1, 2, 3, 4], 7) => false
-    // search([7, 3, 2, 8, 2, 3, 4], 3) => true
-
-    // Wrapper Method (Provided for you):
-    public static boolean search(ArrayList<Integer> list, int x) {
-        // YOUR CODE HERE
-        return false;
-    }
-
-    // Tail Recursive Method:
-    public static boolean searchTR(ArrayList<Integer> list, int x, int i) {
+    // Tail recursive method:
+    public static boolean binarySearchTR(int[] arr, int num, int lowerBound, int upperBound) {
         // YOUR CODE HERE
         return false;
     }
 
 
-    // Write a method that uses recursion to check if every number
-    // in an **array** is even
-    // Examples:
-    // allEven([1, 2, 3, 4]) => false
-    // allEven([0, 2, 6, 4]) => true
-    // allEven([7, 3, 2, 8, 2, 3, 4]) => false
-
-    // Wrapper Method (Provided for you):
-    public static boolean allEven(int[] arr) {
-        // YOUR CODE HERE
-        return false;
-    }
-
-    // Tail Recursive Method:
-    // You should write this yourself!
-
-
-    // ********************
-    // Examples From Class:
-    // ********************
-    public static void floodFill(char[][] mat, int row, int col) {
-        // Check out of bounds, return
-        if (row < 0 || col < 0 || row >= mat.length || col >= mat[0].length){
-            return;
-        }
-        // If we're at wall, don't do anything
-        else if (mat[row][col] == 'w') {
-            return;
-        }
-        // If we've already visited there, let's return early
-        else if (mat[row][col] == '*') {
-            return;
-        }
-        else {
-            // Leave "breadcrumbs"
-            mat[row][col] = '*';
-
-            // Visit our neighbors (left, up, right, down)
-            floodFill(mat, row, col-1);
-            floodFill(mat, row-1, col);
-            floodFill(mat, row, col+1);
-            floodFill(mat, row+1, col);
-        }
-    }
 
 
 
@@ -131,79 +31,44 @@ public class MyMain {
     // Methods for homework:
     // ********************
 
-    // This recursive method checks if the array contains exactly
-    // count copies of the integer x
+    // This method does not use recursion!
 
-    // Wrapper method
-    public static boolean hasCountCopies(int[] arr, int x, int count) {
+    // Write a method takes two sorted arrays as input and combines them
+    // into one large combined arrays.
+
+    // Here is the pseudocode for merge:
+    // * Create a new big output array
+    // * Start at the beginning of both input arrays
+    // * Take the smaller of the two values and add it to the output array
+    // * Repeat until we’ve gone through all the values in one of the arrays
+    // * Copy the remaining values from the other array into the output array
+
+    // Here's an example of how it looks in action:
+    // arr1 = [1, 4, 5, 8]       arr2 = [2, 6, 7, 10]      output = [                         ]
+    //         ^                         ^                           ^
+    //     idx1 = 0                  idx2 = 0                   outputIdx = 0
+
+    // The current value in arr1 (1) is smaller than the current value
+    // in arr2 (2). So we copy 1 into the output array. Then we increment
+    // both idx1 and outputIdx:
+
+    // arr1 = [1, 4, 5, 8]       arr2 = [2, 6, 7, 10]      output = [1,                       ]
+    //            ^                      ^                              ^
+    //        idx1 = 1               idx2 = 0                      outputIdx = 1
+
+    // The current value in arr1 (4) is larger than the current value
+    // in arr2 (2). So we copy 2 into the output array. Then we increment
+    // both idx2 and outputIdx:
+
+    // arr1 = [1, 4, 5, 8]       arr2 = [2, 6, 7, 10]      output = [1, 2,                     ]
+    //            ^                         ^                              ^
+    //        idx1 = 1                  idx2 = 1                      outputIdx = 2
+
+    // We continue on until one of the arrays is empty
+    // Then we need to copy the rest of the array
+
+    public static int[] merge(int[] arr1, int[] arr2) {
         // YOUR CODE HERE
-        return false;
-    }
-
-    // You may want a tail recursive method
-
-
-    // This recursive method checks if the array is sorted in
-    // non-decreasing order
-
-    // Wrapper method
-    public static boolean isSorted(ArrayList<Integer> list) {
-        // YOUR CODE HERE
-        return false;
-    }
-
-    // You may want a tail recursive method
-
-
-
-
-    // Modify the flood fill algorithm to write an algorithm that looks for
-    // the finish line in a maze
-    // We’ll consider a 2D char array, where the character 'w'
-    // represents a wall, the space character ' ' represents an empty hallway,
-    // and the 'f' represents the finish line
-    // For example:
-    //                                                        row coordinates:
-    //  char[][] mat = { {'w', 'w', ' ', 'w', 'w', 'w'},      // 0
-    //                   {'w', ' ', ' ', 'w', 'f', 'w'},      // 1
-    //                   {'w', ' ', 'w', 'w', ' ', 'w'},      // 2
-    //                   {'w', ' ', ' ', ' ', ' ', 'w'},      // 3
-    //                   {'w', 'w', 'w', ' ', 'w', 'w'},      // 4
-    //                   {'w', ' ', ' ', ' ', 'w', ' '},      // 5
-    //                   {'w', 'w', 'w', 'w', 'w', ' '} };    // 6
-    // col coordinates:    0    1    2    3    4    5
-
-    // We'll be given some starting coordinates (row, col) of where we start
-    // in the maze
-    // Examples:
-    // escape(mat, 0, 0) => false because (0, 0) is a wall
-    // escape(mat, 0, 2) => true because we should be able to make it to f at (1, 4)
-    // escape(mat, 5, 1) => true because we should be able to make it to f at (1, 4)
-    // escape(mat, 6, 5) => false because we get stuck
-
-    // No tail recursion necessary!
-    public static boolean escape(char[][] mat, int row, int col) {
-        // YOUR CODE HERE
-        return false;
-    }
-
-
-
-
-
-
-    public static void main(String[] args) {
-        // Optional: Write some code here to test your methods!
-
-        // row coordinates:
-        char[][] mat = {   {'w', 'w', ' ', 'w', 'w', 'w'},      // 0
-                           {'w', ' ', ' ', 'w', 'f', 'w'},      // 1
-                           {'w', ' ', 'w', 'w', ' ', 'w'},      // 2
-                           {'w', ' ', ' ', ' ', ' ', 'w'},      // 3
-                           {'w', 'w', 'w', ' ', 'w', 'w'},      // 4
-                           {'w', ' ', ' ', ' ', 'w', ' '},      // 5
-                           {'w', 'w', 'w', 'w', 'w', ' '} };    // 6
-        // col coordinates:  0    1    2    3    4    5
-        System.out.println(escape(mat, 5, 1));
+        return null;
     }
 }
