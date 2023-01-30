@@ -9,8 +9,8 @@ public class MyMain {
     // an array using binary search!
 
     // Examples:
-    // binarySearch([5, 2, 4, 3], 4) => true
-    // binarySearch([6, 7, 1, 2, 8], 5) => false
+    // binarySearch([2, 3, 4, 5], 4) => true
+    // binarySearch([1, 2, 6, 7, 8], 5) => false
 
     // Wrapper Method
     public static boolean binarySearch(int[] arr, int num) {
