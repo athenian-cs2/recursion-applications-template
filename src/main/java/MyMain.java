@@ -1,13 +1,8 @@
 import java.util.ArrayList;
 
 public class MyMain {
-    // **************************
-    // In-class Practice Problems
-    // **************************
-
     // Write a method that uses recursion to search for a value in
     // an array using binary search!
-
     // Examples:
     // binarySearch([2, 3, 4, 5], 4) => true
     // binarySearch([1, 2, 6, 7, 8], 5) => false
@@ -24,12 +19,6 @@ public class MyMain {
     }
 
 
-
-
-
-    // ********************
-    // Methods for homework:
-    // ********************
 
     // This method does not use recursion!
 
